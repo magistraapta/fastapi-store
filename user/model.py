@@ -9,4 +9,4 @@ class User(Base):
     username = Column(String, nullable=False)
     password = Column(String, nullable=False)
     
-    # reviews = relationship("Review", back_populates="user")
+    reviews = relationship("Review", back_populates="user")
