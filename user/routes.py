@@ -6,13 +6,17 @@ from db import get_db
 from user.repository import UserRepository
 from user.services import UserService
 from typing import List
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 from user.model import User
 import auth
 from auth import get_current_user
 import utils
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 
 
+
+templates = Jinja2Templates(directory="views")
 user_router = APIRouter(prefix="/v1/users", tags=['users'])
 
 user_repository = UserRepository()
