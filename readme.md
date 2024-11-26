@@ -2,7 +2,7 @@
 
 ## To do
 
-- [ ] Create home view
+- [x] Create home view
 - [ ] Create home detail
 - [ ] Create home dashboard
 - [ ] Create home login page
@@ -10,3 +10,4 @@
 - [ ] Upload image feature
 
 # About layered architecture
+
