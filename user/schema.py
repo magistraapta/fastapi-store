@@ -22,10 +22,17 @@ class Token(BaseModel):
     
 class DataToken(BaseModel):
     id: Optional[str] = None
+    
 class UserUpdate(BaseModel):
     username: Optional[str] = None  # `username` is optional
     password: Optional[str] = None 
 
     class Config:
         orm_mode = True
+        
+class UserLogin(BaseModel):
+    username: str
+    password: str
+class Logout(BaseModel):
+    message: str
         
