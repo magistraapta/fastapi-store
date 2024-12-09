@@ -9,22 +9,13 @@ from user.model import User
 from typing import Optional
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="v1/users/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 SECRET_KEY = "b19427d4c128720fcf0f3edf321dd5bc"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 5
+REFRESH_TOKEN_EXPIRE_DAYS = 7
 
-# def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-#     to_encode = data.copy()
-#     if expires_delta:
-#         expire = datetime.utcnow() + expires_delta
-#     else:
-#         expire = datetime.utcnow() + timedelta(minutes=15)
-        
-#     to_encode.update({"exp": expire.timestamp()})
-#     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, ALGORITHM)
-#     return encoded_jwt
 
 def create_access_token(data: dict):
     to_encode = data.copy()
@@ -43,6 +34,15 @@ def verify_token(token: str):
         return username
     except JWTError:
         return None
+    
+def refresh_token(data: dict):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
+    to_encode.update({"exp": expire})
+    encode_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    
+    return encode_jwt
+    
     
 async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     username = verify_token(token=token)

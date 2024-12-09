@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
-from user.schema import UserCreate, UserBase, UserUpdate, UserResponse, Token
+from user.schema import UserCreate, UserBase, UserUpdate, UserResponse, Token, Logout
 from db import get_db
 from user.repository import UserRepository
 from user.services import UserService
 from typing import List
 from fastapi.security import OAuth2PasswordRequestForm
 from user.model import User
-import auth
-from auth import get_current_user
+import auth.auth as auth
+from auth.auth import get_current_user
 import utils
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
@@ -90,21 +90,3 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     
     return deleted_user
 
-@user_router.post("/login", response_model=Token)
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    
-    user = db.query(User).filter(User.username == form_data.username).first()
-    
-    if not user or not utils.verify_password(form_data.password, user.password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    access_token = auth.create_access_token(data={"sub": user.username})
-    return {"access_token": access_token, "token_type": "bearer"}
-
-
-@user_router.get("/users/me", response_model=UserBase)
-async def read_users_me(current_user: User = Depends(get_current_user)):
-    return current_user
