@@ -13,7 +13,7 @@ from user.schema import Token
 auth_router = APIRouter(prefix='/auth', tags=['auth'])
 
 @auth_router.post("/login", response_model=Token)
-def login(login_data: UserLogin, db: Session = Depends(get_db)):
+def login(login_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     
     try:
         
