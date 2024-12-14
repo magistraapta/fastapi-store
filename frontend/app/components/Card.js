@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Card({id, image_url, name, price}) {
     return (
         <div>
-            <div className="border rounded-xl shadow-md w-[300px] p-4">
+            <div className="rounded-xl bg-white border border-gray-300 w-[320px] h-full p-4">
                 <div key={id}>
                     <Image
                         src={image_url}
@@ -11,9 +11,9 @@ export default function Card({id, image_url, name, price}) {
                         height={200}
                         alt="product-image"
                     />
-                    <div>
-                    <h4 className="text-3xl font-semibold">{name}</h4>
-                    <p>Rp.{price}</p>
+                    <div className="mt-4">
+                        <h4 className="text-3xl font-semibold">{name}</h4>
+                        <p>Rp.{price}</p>
                     </div>
                 </div>
             </div>
