@@ -1,9 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import CartSidebar from "./CartSidebar";
 
 export default function Navbar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isCartOpen, setCartOpen] = useState(false);
+
+    const toggleCart = () => {
+        setCartOpen((prev) => !prev)
+    }
 
     useEffect(() => {
         // Check if the access token is stored
@@ -26,18 +32,24 @@ export default function Navbar() {
 
                 <div className="max-lg:hidden flex gap-4">
                     {navbarList.map((item, index) => (
-                        <p className=" text-gray-600 text-sm" key={index}>{item}</p>
+                        <p className=" text-gray-500 text-sm" key={index}>{item}</p>
                     ))}
                 </div>
             </div>
             
             <div>
-                <input type="text" placeholder="input for search" className="border border-gray-300 rounded-lg py-2 px-4 w-full" />
+                <input type="text" placeholder="input for search" className="border border-gray-200 rounded-lg py-2 px-4 w-full" />
             </div>
 
             <div className="flex justify-end">
-                <button className="text-gray-600 text-sm border border-blue-600 rounded-lg p-2">Cart</button>
+                <button onClick={toggleCart} className="relative bg-white border border-gray-200 p-2 rounded-lg">
+                    🛒
+                    <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full px-2">
+                    3
+                    </span>
+                </button>
             </div>
+            <CartSidebar isOpen={isCartOpen} onClose={toggleCart}/>
         </nav>
     );
 }
