@@ -3,6 +3,7 @@ from typing import Optional, List
 from datetime import datetime
 
 class ReviewBase(BaseModel):
+    user_id: int
     content: str
 
 class ReviewCreate(ReviewBase):

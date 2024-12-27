@@ -19,6 +19,7 @@ class ProductResponse(BaseModel):
     image_url: str
     created_at: datetime
     updated_at: datetime
+    reviews: List[ReviewBase] = []
 
     class Config:
         from_attributes = True
