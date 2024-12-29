@@ -28,7 +28,7 @@ def get_product(product_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Error getting product: {e}")
 
 @product_router.post("/", response_model=ProductResponse)
-def create_user(product_create: ProductCreate, db: Session = Depends(get_db)):
+def create_product(product_create: ProductCreate, db: Session = Depends(get_db)):
     try:
         
         return product_service.create_product(db=db, product=product_create)
