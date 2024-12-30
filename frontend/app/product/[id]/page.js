@@ -3,7 +3,12 @@ import { Button } from "@/components/ui/button";
 
 
 export default async function Page({params}) {
-    const res = await fetch(`http://localhost:8000/v1/products/${params.id}`)
+    const {id} = params.id
+    const res = await fetch(`http://localhost:8000/v1/products/${id}`)
+
+    if (!res.ok) {
+        throw new Error("failed to fetch product data")
+    }
     const product = await res.json()
     return (
         <>
@@ -37,7 +42,6 @@ export default async function Page({params}) {
                     
             </div>
         </div>
-           
         </>
     )
 }
@@ -46,5 +50,5 @@ async function FetchReview() {
     const res = await fetch()
     const reviews = res.json()
 
-    
+
 }
