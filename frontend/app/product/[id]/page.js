@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 
 export default async function Page({params}) {
-    const {id} = params.id
+    const {id} = params
     const res = await fetch(`http://localhost:8000/v1/products/${id}`)
 
     if (!res.ok) {
