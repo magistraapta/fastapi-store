@@ -4,7 +4,8 @@
 
 - [x] Create home view
 - [x] Create admin dashboard
-- [ ] product detail
+- [x] product detail
+- [ ] Authentication Features
 - [ ] Cart feature
 - [ ] checkout feature
 
