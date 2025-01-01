@@ -26,7 +26,11 @@ export default function Login() {
         setLoading(true)
     
         try {
-            await login(formData)
+            const user = await login(formData)
+
+            if (!user){
+                throw new Error("invalid credentials")
+            }
             router.push("/")
         } catch (error) {
             setError(error.message || 'An error occurred during login')

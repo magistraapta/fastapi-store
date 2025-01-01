@@ -73,6 +73,7 @@ export function AuthProvider({ children }) {
             localStorage.setItem("token", res.access_token);
             localStorage.setItem("userData", JSON.stringify(res.user)); // Save user data in localStorage
             setUser(res.user);
+            return res.user
         } catch (error) {
             setError("An unexpected error occurred. Please try again."); // Handle unexpected errors
         } finally {
