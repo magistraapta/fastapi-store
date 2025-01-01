@@ -17,6 +17,7 @@ class UserResponse(BaseModel):
     status: str
     data: Optional[dict] = None
 class Token(BaseModel):
+    user: UserBase
     access_token: str
     token_type: str
     
