@@ -27,8 +27,7 @@ async function FetchProducts() {
             <img src={`http://localhost:8000${product.image_url}`} className=" object-contain" alt="product-image" />
             <div className="mt-4">
               <p>{product.name}</p>
-              <p>{product.description}</p>
-              <p>${product.price}</p>
+              <p className="">${product.price}</p>
             </div>
             
           </div>
