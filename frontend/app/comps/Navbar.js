@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "../context/AuthContext"
 import { useRouter } from "next/navigation"
+import { UserDropdown } from "./UserDropdown"
 
 export default function Navbar() {
     const {user, logout} = useAuth()
@@ -33,7 +34,10 @@ export default function Navbar() {
             <div className="flex gap-5 justify-end items-center">
                 {user ? (
                     <>
-                        <p>Welcome, {user.username}</p>
+                        <div>
+                            <UserDropdown username={user.username}/>
+
+                        </div>
                         <Button onClick={handleLogout} variant="destructive">
                             Logout
                         </Button>
