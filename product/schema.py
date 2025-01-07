@@ -23,3 +23,7 @@ class ProductResponse(BaseModel):
 
     class Config:
         from_attributes = True
+        
+class ProductListResposne(BaseModel):
+    message: str
+    products: List[ProductResponse]
