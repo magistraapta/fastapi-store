@@ -9,7 +9,9 @@ export default async function Page({params}) {
     if (!res.ok) {
         throw new Error("failed to fetch product data")
     }
-    const product = await res.json()
+    const data = await res.json()
+    const product = data.product
+    
     return (
         <>
         <Navbar/>
